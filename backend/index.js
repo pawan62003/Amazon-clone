@@ -22,11 +22,11 @@ app.use('/cart',CartRoute)
 
 
 
-app.listen(8080,async()=>{
+app.listen(1661,async()=>{
     try {
         await connection;
         console.log('connected to db')
-        console.log("server is running at port 8080")
+        console.log("server is running at port 1661")
     } catch (error) {
         console.log("something went wrong while run server")
     }
