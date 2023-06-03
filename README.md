@@ -34,13 +34,13 @@
 <h3>HomePage</h3>
 <img src="/assets/Screenshot (541).png" alt="homepage"/>
 <h3>Login/SignUp </h3>
-<img src="/Images/login.png" alt="homepage"/>
+<img src="/assets/Screenshot (545).png" alt="homepage"/>
 <h3>Products Page</h3>
-<img src="/Images/Products.png" alt="homepage"/>
+<img src="/assets/Screenshot (543).png" alt="homepage"/>
 <h3>Single Product</h3>
-<img src="/Images/singleProduct.png" alt="homepage"/>
-<h3>Cart</h3>
-<img src="/Images/cart.png" alt="homepage"/>
+<img src="/assets/Screenshot (544).png" alt="homepage"/>
+<!-- <h3>Cart</h3>
+<img src="/assets/Screenshot (541).png" alt="homepage"/> -->
 <h3>Checkout Page</h3>
 <img src="/Images/checkout.png" alt="homepage"/>
 <h3>Order Details</h3>
