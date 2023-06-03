@@ -21,15 +21,15 @@
 
 <h1>Tech Stacks:</h1>
 <ul>
-<li>Express Js</li>
-<li>Node Js</li>
+<li>Express Js | Node Js | MongoDB | Redux js | JavaScript | Reactjs | Chakra UI | HTML | CSS</li>
+<!-- <li>Node Js</li>
 <li>MongoDB</li>
 <li>Redux js</li>
 <li>JavaScript</li>
 <li>Reactjs</li>
 <li>Chakra UI</li>
 <li>HTML</li>
-<li>CSS</li>
+<li>CSS</li> -->
 </ul>
 <h3>HomePage</h3>
 <img src="/assets/Screenshot (541).png" alt="homepage"/>
