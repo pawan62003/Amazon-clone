@@ -3,6 +3,7 @@ import { useState,useContext, useEffect,useCallback} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import useRazorpay from 'react-razorpay'
+import axios from "axios";
 import CartItems from "../../Components/Cart/CartItems.jsx";
 import "../../CSS/Cart.css";
 import {
@@ -12,7 +13,19 @@ import {
 import Address from "../../Components/Cart/Address.jsx"
 
 const Cart = () => {
-  const { data } = useSelector((store) => store.cartReducer);
+  // const { data } = useSelector((store) => store.cartReducer);
+  const [data,setData] = useState([]);
+
+  useEffect(async()=>{
+    const res = await axios.get(`https://grumpy-goat-singlet.cyclic.app/cart`, {
+      headers: {
+         token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDY0NzhkZmU2OTlkODgxODE5NWZkZjUiLCJhZG1pbklEIjoiNjQ2NDc4ZGZlNjk5ZDg4MTgxOTVmZGY1IiwiaWF0IjoxNjg1NzI3Njg2fQ.I8CZxLN4FH9dkuOL-HyIpN1d0_Qd8hJwg4zfpoxMVb4' 
+        },
+    });
+    setData(res.data);
+  },[])
+
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const dispatch = useDispatch();
@@ -21,12 +34,12 @@ const Cart = () => {
   const [userAddress,setUserAddress]=useState();
   const [order,setOrder]=useState([]);
 
-  // variable data such as price,quantity,discount etc.
-  let totalQuantity = data
-    .map((el) => el.quantity)
-    .reduce((el, sum) => el + sum, 0);
+  let totalQuantity = data.length
 
-  let price1 = data.map((el) => el.price * el.quantity);
+  let price1 = data.map(el => el.price*el.qty);
+
+
+
   let TotalOriginalPrice = price1.reduce((res, sum) => res + sum, 0);
   let totalOriginalPrice = TotalOriginalPrice.toLocaleString("en-IN");
 
@@ -35,7 +48,7 @@ const Cart = () => {
   let totalCurrentlPrice = TotalCurrentlPrice.toLocaleString("en-IN");
 
   //discount price
-  let discountPrice = TotalOriginalPrice - TotalCurrentlPrice;
+  let discountPrice = TotalOriginalPrice - 0;
   discountPrice = discountPrice.toLocaleString("en-IN");
 
   useEffect(() => {
@@ -43,11 +56,13 @@ const Cart = () => {
       dispatch(getCartProducts());
     }
   }, []);
+
   const handleSubmit=(obj,arr)=>{
     setUserAddress({...obj})
     onClose()
     handlePayment(TotalOriginalPrice,arr)
   }
+
   const handleRemove = (id) => {
     dispatch(deleteCartProduct(id)).then(() =>
       toast({
@@ -59,6 +74,7 @@ const Cart = () => {
       })
     );
   };
+
   const handlePayment = useCallback(
     async (totalAmount,arr) => {
       console.log(arr)
@@ -121,7 +137,7 @@ const Cart = () => {
           </div>
           <div>
             <p>Discount</p>
-            <p>− ₹ {discountPrice}</p>
+            <p>− ₹ 00</p>
           </div>
           <div>
             <p>Delivery Charges</p>
@@ -129,7 +145,7 @@ const Cart = () => {
           </div>
           <div>
             <p>Total Amount</p>
-            <p>₹ {totalCurrentlPrice}</p>
+            <p>₹ {totalOriginalPrice}</p>
           </div>
           <div>
             <p></p>

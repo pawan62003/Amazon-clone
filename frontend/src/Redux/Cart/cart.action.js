@@ -19,18 +19,21 @@ const request = () => {
     type: CART_REQUEST,
   };
 };
+
 const getsuccess = (data) => {
   return {
     type: CART_GET_SUCCESS,
     payload: data,
   };
 };
+
 const postsuccess = (data) => {
   return {
     type: CART_POST_SUCCESS,
     payload: data,
   };
 };
+
 const patchsuccess = (data) => {
   return {
     type: CART_PATCH_SUCCESS,
@@ -60,6 +63,7 @@ export const getCartProducts = (data) => async (dispatch) => {
   try {
     const url = `https://grumpy-goat-singlet.cyclic.app/cart`;
     const res = await getCartProductsApi(url, data);
+    console.log(res)
     if (res) {
       dispatch(getsuccess(res));
     }
@@ -67,6 +71,7 @@ export const getCartProducts = (data) => async (dispatch) => {
     dispatch(error());
   }
 };
+
 export const postCartProduct = (data) => async (dispatch) => {
   dispatch(request());
   try {
