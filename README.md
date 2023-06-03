@@ -41,7 +41,7 @@
 <img src="/assets/Screenshot (544).png" alt="homepage"/>
 <!-- <h3>Cart</h3>
 <img src="/assets/Screenshot (541).png" alt="homepage"/> -->
-<!-- <h3>Checkout Page</h3>
+<h3>Checkout Page</h3>
 <img src="/Images/checkout.png" alt="homepage"/>
 <h3>Order Details</h3>
 <img src="/Images/ordersummary.png" alt="homepage"/>
@@ -52,7 +52,7 @@
 <h3>Admin Add Product</h3>
 <img src="/Images/addProduct.png" alt="homepage"/>
 <h3>Error Page</h3>
-<img src="/Images/Error.png" alt="homepage"/> -->
+<img src="/Images/Error.png" alt="homepage"/>
 
 <!-- <h1>Members</h1>
 <h3><a href="https://github.com/pawan62003">Pawan Kumar(Team Lead) </a>responsible for building Cart section.</h3>
