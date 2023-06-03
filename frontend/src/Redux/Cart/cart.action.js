@@ -58,7 +58,7 @@ const error = () => {
 export const getCartProducts = (data) => async (dispatch) => {
   dispatch(request());
   try {
-    const url = `${process.env.REACT_APP_URL}/cart`;
+    const url = `https://grumpy-goat-singlet.cyclic.app/cart`;
     const res = await getCartProductsApi(url, data);
     if (res) {
       dispatch(getsuccess(res));

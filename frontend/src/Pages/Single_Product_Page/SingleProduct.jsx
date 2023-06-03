@@ -12,14 +12,14 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { ImCart } from "react-icons/im";
 import { IoMdShareAlt } from "react-icons/io";
 import { CiDiscount1 } from "react-icons/ci";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { json, Link, useNavigate, useParams } from "react-router-dom";
 import Styles from "../../CSS/SingleProductPage.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -66,19 +66,46 @@ const SingleProduct = () => {
       title,
       quantity: 1,
     };
-      dispatch(postCartProduct(payload))
-        .then(() => dispatch(getCartProducts()))
-        .then(() => navigate("/cart"))
-    //     .catch((err) =>
-    //       toast({
-    //         position: `top`,
-    //         title: `Oppps unable to add product`,
-    //         description: err,
-    //         status: "error",
-    //         duration: 2000,
-    //         isClosable: true,
-    //       }).then(() => navigate("/cart"))
-    //     );
+    console.log(payload)
+    //   dispatch(postCartProduct(payload))
+    //     .then(() => dispatch(getCartProducts()))
+    //     .then(() => navigate("/cart"))
+    // //     .catch((err) =>
+    // //       toast({
+    // //         position: `top`,
+    // //         title: `Oppps unable to add product`,
+    // //         description: err,
+    // //         status: "error",
+    // //         duration: 2000,
+    // //         isClosable: true,
+    // //       }).then(() => navigate("/cart"))
+    // //     );
+
+
+
+    const url = 'https://grumpy-goat-singlet.cyclic.app/cart';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDY0NzhkZmU2OTlkODgxODE5NWZkZjUiLCJhZG1pbklEIjoiNjQ2NDc4ZGZlNjk5ZDg4MTgxOTVmZGY1IiwiaWF0IjoxNjg1NzI3Njg2fQ.I8CZxLN4FH9dkuOL-HyIpN1d0_Qd8hJwg4zfpoxMVb4';
+    // const token = localStorage.getItem('token')
+    console.log(token)
+    // const bodyData = {
+    //     "title":"Apple iPhone 14 Pro Max (128 GB) - Deep Purple","image":"https://m.media-amazon.com/images/I/71yzJoE7WlL._AC_UY218_.jpg","price":127999,"category":"electronics","sub_category":"mobile","rating":4.5,"reviews":467,"brand":"apple","adminID":"646478dfe699d8818195fdf5",
+    //   qty: 1
+    // };
+    
+    axios.post(url, payload, {
+      headers: {
+        'token': `${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    
+
   };
 
   const handleBuy = () => {

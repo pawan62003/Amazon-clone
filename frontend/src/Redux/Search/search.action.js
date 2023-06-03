@@ -65,6 +65,7 @@ export const getSubCategory = (param) => async (dispatch) => {
     const url = `${process.env.REACT_APP_URL}/products/subcategory`;
     const res = await getSubCategoryApi(url, param);
     if (res) {
+      console.log(res)
       return res.product;
     }
   } catch (err) {

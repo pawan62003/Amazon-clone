@@ -84,11 +84,21 @@ ProductRoute.get('/',async(req,res)=>{
 ProductRoute.get('/:id',async(req,res)=>{
     const {id} = req.params;
     try {
-        const product = await ProductModel.findById({_id:id})
-        res.send(product)
+        const product = await ProductModel.find({_id:id})
+         res.send(product)
     } catch (error) {
-        res.send({err:error})
+        res.send(error)
     }
+})
+
+ProductRoute.get("/subcategory",async(req,res)=>{
+  try {
+    const product = await ProductModel.find(req.query);
+ 
+    res.status(200).send({ product });
+  } catch (error) {
+    res.status(400).send(error);
+  }
 })
 
 module.exports={

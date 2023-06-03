@@ -8,18 +8,20 @@ const { CartRoute } = require('./routes/Cart.route');
 const { OrderRoute } = require('./routes/Order.route');
 const { admin_middleware } = require('./middleware/admin.middleware');
 const { AdminRoute } = require('./routes/Admin.route');
+const cors = require('cors')
 
 app.use(express.json())
-app.use('/user',UserRoute)
+app.use(cors())
+
+app.use('/',UserRoute)
 app.use('/products',ProductRoute)
 
 app.use(admin_middleware);
 app.use('/admin',AdminRoute)
 
 app.use(auth)
-app.use('/orderhistory',OrderRoute)
+app.use('/order',OrderRoute)
 app.use('/cart',CartRoute)
-
 
 
 app.listen(1661,async()=>{

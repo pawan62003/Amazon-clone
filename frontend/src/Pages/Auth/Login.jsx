@@ -4,32 +4,50 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import REACTLOGO from "./amaze.png";
+import { useToast } from '@chakra-ui/react'
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
+  const toast = useToast()
+  const navigate = useNavigate()
+  
 
   const handleSubmit = () => {
     const payload = { email, password };
-    // console.log(payload)
-    fetch("https://calm-red-iguana-hose.cyclic.app/login", {
+    if(email===""||password===""){
+      alert("please fill all cradiantial")
+    }
+    else{
+
+    fetch("https://grumpy-goat-singlet.cyclic.app/login", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
+        localStorage.setItem("token", 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NDY0NzhkZmU2OTlkODgxODE5NWZkZjUiLCJhZG1pbklEIjoiNjQ2NDc4ZGZlNjk5ZDg4MTgxOTVmZGY1IiwiaWF0IjoxNjg1NzI3Njg2fQ.I8CZxLN4FH9dkuOL-HyIpN1d0_Qd8hJwg4zfpoxMVb4');
+        console.log(data)
         setStatus(data.message);
         login(data.token);
-        localStorage.setItem("token", data.token);
         setEmail("");
         setPassword("");
+        toast({
+          title: 'You are loged in.',
+          description: "We've login your account for you.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+        navigate("/")
       })
       .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -61,6 +79,7 @@ export const Login = () => {
 
           <Input
             value={email}
+            required
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -74,6 +93,7 @@ export const Login = () => {
           ></Input>
           <Input
             value={password}
+            required
             onChange={(e) => {
               setPassword(e.target.value);
             }}
